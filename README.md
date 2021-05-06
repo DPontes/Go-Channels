@@ -11,7 +11,7 @@ To avoid a potential hang-up waiting for a page to respond when the application 
 - `func main()`
 Loops through the `links` slice of strings once, creating a `goroutine` that will handle the `checkLink(link, c)` function. In its call, the `channel` `c` is given as an input.
 
-After this initial loop, a second loop will watch the `channel` `c` (indefinitely). When a value comes out of it (from the `checkLink function called previously), the value is assigned to a `link` `l`. This link is then used in a [function literal](https://golang.org/ref/spec#Function_literals) (equivalent to a lambda in C++ or Python). The function literal is used so that the main routine isn't blocked by the `time.Sleep()` function.
+After this initial loop, a second loop will watch the `channel` `c` (indefinitely). When a value comes out of it (from the `checkLink` function called previously), the value is assigned to a `link` `l`. This link is then used in a [function literal](https://golang.org/ref/spec#Function_literals) (equivalent to a lambda in C++ or Python). The function literal is used so that the main routine isn't blocked by the `time.Sleep()` function.
 The `link` `l` is passed as a value
 
 ```bash
@@ -30,12 +30,18 @@ If there is no error returned by the `http.Get(link)` call, it indicates that th
 
 ## Output
 
-A continuous list of strings indicating if the webpages in the `links` slice of strings are up / down.
+A continuous list of strings indicating if the webpages in the `links` slice of strings are up / down, until there is an interrupt signal from the keyboard (Ctrl+C).
 
 ### Example
 
 ```bash
-
+https://golang.org is up!
+https://google.com is up!
+https://facebook.com is up!
+https://amazon.com is up!
+https://golang.org is up!
+https://google.com is up!
+https://facebook.com is up!
 ```
 
 ## How-To
